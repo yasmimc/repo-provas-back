@@ -6,16 +6,16 @@ import "reflect-metadata";
 
 import connectDatabase from "./database";
 
-import * as userController from "./controllers/userConroller";
+import healthRouter from "./routers/healthRouter";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/users", userController.getUsers);
+app.use(healthRouter);
 
-export async function init () {
-  await connectDatabase();
+export async function init() {
+    await connectDatabase();
 }
 
 export default app;
