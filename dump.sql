@@ -1,6 +1,7 @@
 CREATE TABLE "subjects" (
 	"id" serial NOT NULL,
 	"period" int NOT NULL,
+	"name" TEXT NOT NULL,
 	CONSTRAINT "subjects_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
