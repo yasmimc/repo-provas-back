@@ -8,6 +8,10 @@ export async function fetchSubjects() {
         select: ["id", "name", "period"],
     });
 
+    const periodsAux = subjects.map((subject) => subject.period);
+    const periods = periodsAux.filter(
+        (period, index) => periodsAux.indexOf(period) === index
+    );
     for (let i = 0; i < subjects.length; i++) {
         const examsCount = await getRepository(Exam)
             .createQueryBuilder("exams")
@@ -19,5 +23,8 @@ export async function fetchSubjects() {
         subjects[i].exams = examsCount;
     }
 
-    return subjects;
+    return periods.map((period) => ({
+        period,
+        subjects: subjects.filter((subject) => subject.period === period),
+    }));
 }
