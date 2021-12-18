@@ -10,4 +10,6 @@ export default class Subject {
 
     @Column()
     period: number;
+
+    exams: number;
 }

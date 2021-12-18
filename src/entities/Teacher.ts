@@ -7,4 +7,6 @@ export default class Teacher {
 
     @Column()
     name: string;
+
+    exams: number;
 }
