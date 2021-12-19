@@ -6,6 +6,7 @@ import {
     JoinColumn,
 } from "typeorm";
 import Class from "./Class";
+import ExamCategory from "./ExamCategory";
 
 @Entity("exams")
 export default class Exam {
@@ -21,4 +22,10 @@ export default class Exam {
     @ManyToOne(() => Class, (c) => c.id, { eager: true })
     @JoinColumn({ name: "class_id" })
     class: Class;
+
+    @ManyToOne(() => ExamCategory, (examCategory) => examCategory.id, {
+        eager: true,
+    })
+    @JoinColumn({ name: "category" })
+    category: ExamCategory;
 }

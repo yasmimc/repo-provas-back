@@ -3,18 +3,28 @@ import { getRepository } from "typeorm";
 import Exam from "../entities/Exam";
 
 export async function fetchExams(teacher: any, subject: any) {
-    const exams = await getRepository(Exam).find({
+    let exams = await getRepository(Exam).find({
         select: ["id", "name", "link"],
-        relations: ["class"],
+        relations: ["class", "category"],
     });
 
+    const categoriesAux = exams.map((exam) => exam.category.name);
+    const categories = categoriesAux.filter(
+        (category, index) => categoriesAux.indexOf(category) === index
+    );
+
     if (teacher) {
-        return exams.filter((exam) => exam.class.teacher.name === teacher);
+        exams = exams.filter((exam) => exam.class.teacher.name === teacher);
     }
 
     if (subject) {
-        return exams.filter((exam) => exam.class.subject.name === subject);
+        exams = exams.filter((exam) => exam.class.subject.name === subject);
     }
 
-    return exams;
+    const examsByCategory = categories.map((category) => ({
+        category,
+        exams: exams.filter((exam) => exam.category.name === category),
+    }));
+
+    return examsByCategory;
 }
