@@ -1,9 +1,21 @@
 import { getRepository } from "typeorm";
+import Class from "../entities/Class";
 import Exam from "../entities/Exam";
 
 import Teacher from "../entities/Teacher";
 
-export async function fetchTeachers() {
+export async function fetchTeachers(subject: any) {
+    if (subject) {
+        const classes = await getRepository(Class).find({
+            select: ["id"],
+            relations: ["subject", "teacher"],
+        });
+        const teachersBySubject = classes
+            .filter((c) => c.subject.name === subject)
+            .map((c) => c.teacher);
+        return teachersBySubject;
+    }
+
     const teachers = await getRepository(Teacher).find({
         select: ["id", "name"],
     });
