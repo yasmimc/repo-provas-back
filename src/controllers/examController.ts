@@ -10,4 +10,14 @@ async function getExams(req: Request, res: Response) {
         res.sendStatus(500);
     }
 }
-export { getExams };
+
+async function getExamsCategories(req: Request, res: Response) {
+    try {
+        const examsCategories = await examService.fetchExamsCategories();
+        res.send(examsCategories);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+}
+export { getExams, getExamsCategories };

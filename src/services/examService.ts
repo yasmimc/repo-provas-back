@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 
 import Exam from "../entities/Exam";
+import ExamCategory from "../entities/ExamCategory";
 
 export async function fetchExams(teacher: any, subject: any) {
     let exams = await getRepository(Exam).find({
@@ -27,4 +28,12 @@ export async function fetchExams(teacher: any, subject: any) {
     }));
 
     return examsByCategory;
+}
+
+export async function fetchExamsCategories() {
+    const examsCategories = await getRepository(ExamCategory).find({
+        select: ["id", "name"],
+    });
+
+    return examsCategories;
 }
