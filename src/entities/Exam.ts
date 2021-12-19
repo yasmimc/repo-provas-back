@@ -18,7 +18,7 @@ export default class Exam {
     @Column()
     link: string;
 
-    @ManyToOne(() => Class, (c) => c.id)
+    @ManyToOne(() => Class, (c) => c.id, { eager: true })
     @JoinColumn({ name: "class_id" })
     class: Class;
 }
