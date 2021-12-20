@@ -1,4 +1,5 @@
-import { getRepository } from "typeorm";
+import { getConnection, getRepository } from "typeorm";
+import Class from "../entities/Class";
 
 import Exam from "../entities/Exam";
 import ExamCategory from "../entities/ExamCategory";
@@ -36,4 +37,26 @@ export async function fetchExamsCategories() {
     });
 
     return examsCategories;
+}
+
+export async function insertExam(newExam: any) {
+    const classes = await getRepository(Class).find({
+        select: ["id", "teacher", "subject"],
+        relations: ["teacher", "subject"],
+    });
+
+    const examClass = classes.find(
+        (c) =>
+            c.teacher.id === newExam.teacher && c.subject.id === newExam.subject
+    );
+
+    delete newExam.teacher;
+    delete newExam.subject;
+
+    await getConnection()
+        .createQueryBuilder()
+        .insert()
+        .into(Exam)
+        .values([{ ...newExam, class: examClass.id }])
+        .execute();
 }

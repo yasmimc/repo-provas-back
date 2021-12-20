@@ -5,5 +5,6 @@ const router = Router();
 
 router.get("/exams", examController.getExams);
 router.get("/exams/categories", examController.getExamsCategories);
+router.post("/exams", examController.postExam);
 
 export default router;
