@@ -25,6 +25,12 @@ export async function fetchSubjects() {
 
     return periods.map((period) => ({
         period,
-        subjects: subjects.filter((subject) => subject.period === period),
+        subjects: subjects
+            .filter((subject) => subject.period === period)
+            .sort((a, b) => {
+                if (a.name < b.name) return -1;
+                if (a.name >= b.name) return 1;
+                return 0;
+            }),
     }));
 }

@@ -23,6 +23,12 @@ export async function fetchExams(teacher: any, subject: any) {
         exams = exams.filter((exam) => exam.class.subject.name === subject);
     }
 
+    exams.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name >= b.name) return 1;
+        return 0;
+    });
+
     const examsByCategory = categories.map((category) => {
         const categoryExams = exams.filter(
             (exam) => exam.category.name === category
@@ -42,7 +48,11 @@ export async function fetchExamsCategories() {
         select: ["id", "name"],
     });
 
-    return examsCategories;
+    return examsCategories.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name >= b.name) return 1;
+        return 0;
+    });
 }
 
 export async function insertExam(newExam: any) {

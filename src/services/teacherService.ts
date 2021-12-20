@@ -13,7 +13,11 @@ export async function fetchTeachers(subject: any) {
         const teachersBySubject = classes
             .filter((c) => c.subject.name === subject)
             .map((c) => c.teacher);
-        return teachersBySubject;
+        return teachersBySubject.sort((a, b) => {
+            if (a.name < b.name) return -1;
+            if (a.name >= b.name) return 1;
+            return 0;
+        });
     }
 
     const teachers = await getRepository(Teacher).find({
@@ -31,5 +35,9 @@ export async function fetchTeachers(subject: any) {
         teachers[i].exams = examsCount;
     }
 
-    return teachers;
+    return teachers.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name >= b.name) return 1;
+        return 0;
+    });
 }
