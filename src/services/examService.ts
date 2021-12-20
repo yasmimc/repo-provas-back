@@ -23,12 +23,18 @@ export async function fetchExams(teacher: any, subject: any) {
         exams = exams.filter((exam) => exam.class.subject.name === subject);
     }
 
-    const examsByCategory = categories.map((category) => ({
-        category,
-        exams: exams.filter((exam) => exam.category.name === category),
-    }));
+    const examsByCategory = categories.map((category) => {
+        const categoryExams = exams.filter(
+            (exam) => exam.category.name === category
+        );
+        if (categoryExams.length)
+            return {
+                category,
+                exams: exams.filter((exam) => exam.category.name === category),
+            };
+    });
 
-    return examsByCategory;
+    return examsByCategory.filter((exam) => exam);
 }
 
 export async function fetchExamsCategories() {
