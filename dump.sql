@@ -64,5 +64,11 @@
 
 
 
+INSERT INTO teachers (name) VALUES ('Antonio Rodrigues'), ('Vanessa Alves'), ('Jose Alvarenga'), ('Olga Vasconcelos'), ('Marcos Silveira');  
 
+INSERT INTO subjects (name, period) VALUES ('Algoritmos 1', 1), ('Algoritmos 2', 2), ('Algoritmos 3', 3), ('Calculo 1', 1), ('Calculo 2', 2), ('Calculo 3', 3);  
+
+INSERT INTO classes (subject_id, teacher_id) VALUES (1, 1), (2, 1), (2, 2), (3, 2), (3, 3), (4, 4), (5, 4), (6, 4), (6, 5);
+
+INSERT INTO exam_categories (name) VALUES ('P1'),('P2'),('P3'); 
 
