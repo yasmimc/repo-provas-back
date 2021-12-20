@@ -19,7 +19,6 @@ export default async function connect() {
             }/entities/*.*`,
         ],
         ssl: process.env.NODE_ENV === "production",
-        // logging: true,
     });
     await connection.connect();
     return connection;
