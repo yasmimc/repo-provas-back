@@ -1,5 +1,7 @@
 # Repo Provas API
 
+This is the API of a platform for people to share their college exams anonymously.
+
 ## Tolling
 
 NodeJs</br>
@@ -7,7 +9,37 @@ Express</br>
 Jest</br>
 Supertest</br>
 
-## Requirements
+## Deployment
+
+This api is deployed on Heroku, you can visit it by accessing this [url]("https://full-stackoverflow-developer.herokuapp.com/").
+
+## Routes
+
+### `GET /health`
+
+This route just returns the http 200 OK status code and is used to check if the API is running.
+
+### `GET /teachers`
+
+Returns the list of registered teachers.
+
+### `GET /subjects`
+
+Returns the list of registered subjects.
+
+### `GET /exams`
+
+Returns the list of registered exams.
+
+### `GET /exams/categories`
+
+Returns the list of registered exams categories.
+
+### `POST /exam` 
+
+Receives a JSON containing the exam name, link, teacher, subject and category.
+
+## Requirements to run:
 
 You must have installed node and npm.
 
@@ -51,6 +83,4 @@ You need to create a .env.test file following the same [.env.example](https://gi
 
 If you want to run any of the above commands on Windows, just add `:windows` to the end of any of them.
 
-### Deployment
 
-This api is deployed on Heroku, you can visit it by accessing this [url]("https://repo-provas-project.herokuapp.com/").
